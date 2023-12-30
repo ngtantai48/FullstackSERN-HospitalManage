@@ -12,11 +12,15 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-
     return queryInterface.bulkInsert('Users', [{
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'example@example.com',
+      email: 'admin@gmail.com',
+      password: 'admin',
+      firstName: 'Nguyen',
+      lastName: 'Tan Tai',
+      address: 'Quy Nhon - Binh Dinh',
+      gender: 1,
+      typeRole: 'ROLE',
+      keyRole: 'R1',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
