@@ -5,8 +5,13 @@
     "database": "hospitalmanage",
     "host": "127.0.0.48",
     "dialect": "mysql",
-    "logging": false
+    "logging": false,
+    "query": {
+      "raw": true
+    },
+    "timezone": "+07:00"
   },
+  
   "test": {
     "username": "root",
     "password": null,
