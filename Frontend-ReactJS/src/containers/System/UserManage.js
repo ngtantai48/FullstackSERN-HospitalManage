@@ -3,12 +3,16 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
 import { getAllUsers } from '../../services/userService';
+import { applyMiddleware } from 'redux';
+import ModalUser from './ModalUser';
+
 class UserManage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            arrUsers: []
+            arrUsers: [],
+            isOpenModalUser: false,
         }
     }
 
@@ -22,18 +26,40 @@ class UserManage extends Component {
         }
     }
 
+    handleAddNewUser = () => {
+        this.setState({
+            isOpenModalUser: true,
+        })
+    }
+
+    toggleUserModal = () => {
+        this.setState({
+            isOpenModalUser: !this.state.isOpenModalUser,
+        })
+    }
+
     /** Lifecycle
      * Run component;
      * 1. Run construct -> init state
      * 2. Did mount (set state)
-     * 3. Render
+     * 3. Render (re-render)
      */
 
     render() {
         let arrUsers = this.state.arrUsers;
+        console.log(arrUsers)
+        // properties ; nested
         return (
             <div className="users-container">
+                <ModalUser
+                    isOpen={this.state.isOpenModalUser}
+                    test={'abc'}
+                    toggleFromParent={this.toggleUserModal}>
+                </ModalUser>
                 <div className='title text-center'>Manage users with Ngtantai</div>
+                <div className='mx-1'>
+                    <button className='btn btn-primary px-3' onClick={() => this.handleAddNewUser()}><i className='fas fa-plus'></i> Add new user </button>
+                </div>
                 <div className='users-table mt-3 mx-2'>
                     <table id="customers">
                         <tr>
@@ -46,9 +72,9 @@ class UserManage extends Component {
 
                         {
                             arrUsers && arrUsers.map((item, index) => {
-                                console.log('check map', item, index)
+                                // console.log('check map', item, index)
                                 return (
-                                    <tr key = {index}>
+                                    <tr key={index}>
                                         <td>{item.email}</td>
                                         <td>{item.firstName}</td>
                                         <td>{item.lastName}</td>
